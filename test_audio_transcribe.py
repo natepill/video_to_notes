@@ -1,26 +1,14 @@
+# importing libraries
 import speech_recognition as sr
+
 import os
+
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 
-# r = sr.Recognizer()
-#
-# PATH = 'example_audio.wav'
-#
-# with sr.AudioFile(PATH) as source:
-#     try:
-#         audio = r.listen(source)
-#         with open('example.txt', 'w') as file:
-#             file.write(r.recognize_google(audio))
-#
-#     except Exception as e:
-#         print(e)
-
-
-
 # a function that splits the audio file into chunks
 # and applies speech recognition
-def silence_based_conversion(path="example_audio.wav"):
+def silence_based_conversion(path = "alice-medium.wav"):
 
     # open the audio file stored in
     # the local system as a wav file.
@@ -86,59 +74,29 @@ def silence_based_conversion(path="example_audio.wav"):
 
         # recognize the chunk
         with sr.AudioFile(file) as source:
+            # remove this if it is not working
+            # correctly.
+            r.adjust_for_ambient_noise(source)
+            audio_listened = r.listen(source)
 
-            try:
-                audio = r.record(source)
-                with open('recognized.txt', 'w') as file:
-                    sentence = r.recognize_google(audio)
-                    file.write(sentence+". ")
+        try:
+            # try converting it to text
+            rec = r.recognize_google(audio_listened)
+            # write the output to the file.
+            fh.write(rec+". ")
 
-            except Exception as e:
-                print(e)
+        # catch any errors.
+        except sr.UnknownValueError:
+            print("Could not understand audio")
 
-
-            # # remove this if it is not working
-            # # correctly.
-            # r.adjust_for_ambient_noise(source)
-            # audio_listened = r.listen(source)
-            #
-            # try:
-            #     # try converting it to text
-            #     rec = r.recognize_google(audio_listened)
-            #     # write the output to the file.
-            #     fh.write(rec+". ")
-            #
-            # # catch any errors.
-            # except sr.UnknownValueError:
-            #     print("Could not understand audio")
-            #
-            # except sr.RequestError as e:
-            #     print("Could not request results. check your internet connection")
+        except sr.RequestError as e:
+            print("Could not request results. check your internet connection")
 
         i += 1
 
     os.chdir('..')
 
 
-
 if __name__ == '__main__':
 
-    silence_based_conversion()
-
-
-
-
-
-# r = sr.Recognizer()
-#
-# PATH = 'example_audio.wav'
-#
-
-# with sr.AudioFile(PATH) as source:
-#     try:
-#         audio = r.record(source)
-#         with open('example.txt', 'w') as file:
-#             file.write(r.recognize_google(audio))
-#
-#     except Exception as e:
-#         print(e)
+    silence_based_conversion('example_audio.wav')
