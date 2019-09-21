@@ -2,7 +2,7 @@ from google.cloud import speech_v1
 from google.cloud.speech_v1 import enums
 
 
-def sample_long_running_recognize(storage_uri):
+def sample_long_running_recognize(audio_path):
     """
     Transcribe long audio file from Cloud Storage using asynchronous speech
     recognition
@@ -14,6 +14,7 @@ def sample_long_running_recognize(storage_uri):
     client = speech_v1.SpeechClient()
 
     # storage_uri = 'gs://cloud-samples-data/speech/brooklyn_bridge.raw'
+    audio_path = "example_audio.wav"
 
     # Sample rate in Hertz of the audio data sent
     sample_rate_hertz = 16000
@@ -29,7 +30,7 @@ def sample_long_running_recognize(storage_uri):
         "language_code": language_code,
         "encoding": encoding,
     }
-    audio = {"uri": storage_uri}
+    audio = {"uri": audio_path}
 
     operation = client.long_running_recognize(config, audio)
 
