@@ -15,11 +15,25 @@ documents = ["This little kitty came to play when I was eating at a restaurant."
 vectorizer = TfidfVectorizer(stop_words='english')
 
 tfidf = vectorizer.fit_transform(documents)
-print(vectorizer.get_feature_names())
+# print(vectorizer.get_feature_names())
 
 # Create NMF w/ 2 topics
 n_topics = 2
 nmf = NMF(n_components=n_topics, random_state=1).fit(tfidf)
 W = nmf.fit_transform(tfidf)
 
-print(W)
+# print(W)
+
+
+n_top_words = 10
+feature_names = vectorizer.get_feature_names()
+
+for index, topic in enumerate(nmf.components_):
+    print(f"Topic Group {index}:")
+    print(" ".join([feature_names[i] for i in topic.argsort()[:-n_top_words -1:-1]]))
+# n_top_words = 10
+# feature_names = vectorizer.get_feature_names()
+#
+# for topic_idx, topic in enumerate(nmf.components_):
+#     print("Topic #%d:" % topic_idx)
+#     print(" ".join([feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]))
