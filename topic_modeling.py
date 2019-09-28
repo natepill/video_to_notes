@@ -57,24 +57,48 @@ def main_topics_small_corpus(corpus, num_topics, n_top_words):
 
 
 
-def main_topics_large_corpus(corpus, num_topics, n_top_words):
-    """
-        Extract main topics from a large corpus using Latent Dirichlet Allocation (LDA)
-
-        Args:
-            corpus (array): Array of documents
-            num_topics (int): Number of topics to extract
-            top_words (int): Number of top words to extract from each topic
-
-        Returns:
-            {String: Array[String]}: {Topic#: Top words from each topic}
-
-    """
-
-
-
 
 # LDA can only use raw term counts for LDA because it is a probabilistic graphical model
 tf_vectorizer = CountVectorizer(stop_words='english')
 tf = tf_vectorizer.fit_transform(documents)
 tf_feature_names = tf_vectorizer.get_feature_names()
+
+no_topics = 2
+
+# fit LDA w/ num topics and bag of words
+lda = LatentDirichletAllocation(n_components=no_topics).fit(tf)
+
+n_top_words = 10
+
+topics_json = {}
+
+for index, topic in enumerate(lda.components_):
+    print(f"Topic {index}:")
+    print(" ".join([tf_feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]))
+
+# display_topics(lda, tf_feature_names, no_top_words)
+
+
+# def main_topics_large_corpus(corpus, num_topics, n_top_words):
+#     """
+#         Extract main topics from a large corpus using Latent Dirichlet Allocation (LDA)
+#
+#         Args:
+#             corpus (array): Array of documents
+#             num_topics (int): Number of topics to extract
+#             top_words (int): Number of top words to extract from each topic
+#
+#         Returns:
+#             {String: Array[String]}: {Topic#: Top words from each topic}
+#
+#     """
+#
+#     tf_vectorizer = CountVectorizer(stop_words='english')
+#     tf = tf_vectorizer.fit_transform(do)
+
+
+
+
+
+
+# if __name__ == "__main__":
