@@ -44,6 +44,8 @@ def main_topics_small_corpus(corpus, num_topics, n_top_words):
 
     topics_json = {}
 
+
+    # Create dictionary of topic number to topic words
     for index, topic in enumerate(nmf.components_):
         topics_json[f"Topic {index+1}"] = [feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]
 
@@ -83,6 +85,7 @@ def main_topics_large_corpus(corpus, num_topics, n_top_words):
 
     topics_json = {}
 
+    # Create dictionary of topic number to topic words
     for index, topic in enumerate(lda.components_):
         topics_json[f"Topic {index+1}"] = [feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]
 
