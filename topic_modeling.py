@@ -2,6 +2,16 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.decomposition import NMF
 
+
+# NOTE: NMF works better on smaller corpuses where LDA is better for larger
+# I'm unsure as to what constitutes a "small" vs "large" dataset... for now:
+# Small dataset: <= 1 minute long video transcript
+# Large dataset: > 1 minute long video transcript
+
+
+# TODO: Swap out example corpus with video transcript that has been split on sentences
+# to form documents.
+
 # Example corpus
 documents = ["This little kitty came to play when I was eating at a restaurant.",
              "Merley has the best squooshy kitten belly.",
