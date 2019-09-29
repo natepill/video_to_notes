@@ -1,0 +1,35 @@
+<body>
+
+  <input type="text" id="videoURL_ID" value="http://video.google.com/timedtext?lang=en&v=gHkELWFqGKQ"></input>
+  <button id = "submit">check response</button>
+</body>
+<script>
+
+  const button = document.getElementById("submit")
+  const videoID = document.getElementById("videoURL_ID")
+
+  button.addEventListener("click", function(){
+    const options = {
+      method: 'post',
+      body: JSON.stringify({
+        videoID: videoID.value
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+
+    console.log(options)
+
+    fetch('./get_data', options).then((res) => {
+      console.log("RETURNING RESPONSE ******************")
+      console.log(res)
+    }).then((json) => {
+      console.log(json)
+    }).catch((err) => {
+      console.log('-- Error --')
+      console.log(err.message)
+    })
+  })
+</script>
