@@ -45,3 +45,22 @@ def remove_stopwords(sen):
 
 # remove stopwords from the sentences
 clean_sentences = [remove_stopwords(r.split()) for r in clean_sentences]
+
+
+# We will first fetch vectors (each of size 100 elements) for the constituent words
+# in a sentence and then take mean/average of those vectors to arrive at a
+# consolidated vector for the sentence.
+
+sentence_vectors = []
+for sentence in clean_sentences:
+    if len(sentence) != 0:
+        vector = sum([word_embeddings.get(w, np.zeros((100,))) for w in sentence.split()])/(len(sentence.split())+0.001)
+    else:
+        vector = np.zeros((100,))
+    sentence_vectors.append(vector)
+
+
+
+# similarity matrix
+sim_mat = np.zeros([len(sentences), len(sentences)])
+sim_mat = np.zeros([len(sentences), len(sentences)])
