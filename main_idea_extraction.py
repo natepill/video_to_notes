@@ -3,6 +3,7 @@ nltk.download('punkt') # one time execution
 
 import pandas as pd
 import numpy as np
+import networkx as nx
 import nltk
 import re
 from nltk.tokenize import sent_tokenize
@@ -74,3 +75,10 @@ for i in range(len(sentences)):
     # NOTE: Why do we need to reshape our vectors, I thought they are already (1,100)?
     if i != j:
       sim_mat[i][j] = cosine_similarity(sentence_vectors[i].reshape(1,100), sentence_vectors[j].reshape(1,100))[0,0]
+
+# The nodes of this graph will represent the sentences and the edges
+# will represent the similarity scores between the sentences. On this graph,
+# we will apply the PageRank algorithm to arrive at the sentence rankings.
+
+nx_graph = nx.from_numpy_array(sim_mat)
+scores = nx.pagerank(nx_graph)
