@@ -1,12 +1,14 @@
 nltk.download('stopwords')
 nltk.download('punkt') # one time execution
 
-import numpy as np
 import pandas as pd
+import numpy as np
 import nltk
 import re
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
+from sklearn.metrics.pairwise import cosine_similarity
+
 
 
 df = pd.read_csv("tennis_articles_v4.csv")
@@ -61,6 +63,14 @@ for sentence in clean_sentences:
 
 
 
-# similarity matrix
+# similarity matrix that will contain the cosine similarity scores of the sentences.
 sim_mat = np.zeros([len(sentences), len(sentences)])
-sim_mat = np.zeros([len(sentences), len(sentences)])
+
+
+# Initialize the matrix with cosine similarity scores.
+for i in range(len(sentences)):
+  for j in range(len(sentences)):
+    # NOTE: Clarify what i == j means in terms of our similarity matrix
+    # NOTE: Why do we need to reshape our vectors, I thought they are already (1,100)?
+    if i != j:
+      sim_mat[i][j] = cosine_similarity(sentence_vectors[i].reshape(1,100), sentence_vectors[j].reshape(1,100))[0,0]
