@@ -79,6 +79,12 @@ for i in range(len(sentences)):
 # The nodes of this graph will represent the sentences and the edges
 # will represent the similarity scores between the sentences. On this graph,
 # we will apply the PageRank algorithm to arrive at the sentence rankings.
-
 nx_graph = nx.from_numpy_array(sim_mat)
+# Apply pagerank algorithm since its the same as TextRank
 scores = nx.pagerank(nx_graph)
+
+# Extract the top sentences for summary extraction
+ranked_sentences = sorted(((scores[i], s) for i,s in enumerate(sentences)), reverse=True)
+
+for i in range(10):
+    print(ranked_sentences[i][1])
