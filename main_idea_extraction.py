@@ -1,5 +1,5 @@
-nltk.download('stopwords')
-nltk.download('punkt') # one time execution
+# nltk.download('stopwords')
+# nltk.download('punkt') # one time execution
 
 import pandas as pd
 import numpy as np
@@ -9,7 +9,6 @@ import re
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
-
 
 
 df = pd.read_csv("tennis_articles_v4.csv")
@@ -24,7 +23,7 @@ sentences = [y for x in sentences for y in x]
 
 
 word_embeddings = {}
-f = open('glove.6B.100d.txt', encoding='utf-8')
+f = open('glove.6B/glove.6B.100d.txt', encoding='utf-8')
 for line in f:
     values = line.split()
     word = values[0]
