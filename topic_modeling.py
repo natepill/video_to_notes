@@ -49,7 +49,7 @@ def main_topics_small_corpus(corpus, num_topics, n_top_words):
     for index, topic in enumerate(nmf.components_):
         topics_json[f"Topic {index+1}"] = [feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]
 
-    print(topics_json)
+    # print(topics_json)
 
     return topics_json
 
@@ -89,7 +89,7 @@ def main_topics_large_corpus(corpus, num_topics, n_top_words):
     for index, topic in enumerate(lda.components_):
         topics_json[f"Topic {index+1}"] = [feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]
 
-    print(topics_json)
+    # print(topics_json)
 
     return topics_json
 
@@ -98,14 +98,14 @@ def main_topics_large_corpus(corpus, num_topics, n_top_words):
 
 if __name__ == "__main__":
     # Example corpus
-    documents = ["This little kitty came to play when I was eating at a restaurant.",
-                 "Merley has the best squooshy kitten belly.",
-                 "Google Translate app is incredible.",
-                 "If you open 100 tab in google you get a smiley face.",
-                 "Best cat photo I've ever taken.",
-                 "Climbing ninja cat.",
-                 "Impressed with google map feedback.",
-                 "Key promoter extension for Google Chrome."]
+
+    documents = ["I was so hungry last night, I ate all the food in the fridge",
+                "The food in the restaurant tasted great, I left a huge tip",
+                "The pork ribs were delicious, I'll be eating there every week.",
+                "I need to use Linear Regression in order to predict Boston Housing",
+                "My model classifies the emotions with a 90% accuracy",
+                "My cancer dectection models needs to be optimized around a high recall score",
+                "Waffles and fried chicken are a tasty combo!"]
 
     print(main_topics_small_corpus(documents, 2, 10))
     print(main_topics_large_corpus(documents, 2, 10))
