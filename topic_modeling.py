@@ -108,4 +108,4 @@ if __name__ == "__main__":
                 "Waffles and fried chicken are a tasty combo!"]
 
     print(main_topics_small_corpus(documents, 2, 10))
-    print(main_topics_large_corpus(documents, 2, 10))
+    # print(main_topics_large_corpus(documents, 2, 10))
