@@ -1,0 +1,11 @@
+cachetools==3.1.1
+google-api-core==1.14.2
+google-auth==1.6.3
+google-cloud-speech==1.2.0
+googleapis-common-protos==1.6.0
+joblib==0.13.2
+networkx==2.3
+pydub==0.23.1
+scikit-learn==0.21.3
+sklearn==0.0
+SpeechRecognition==3.8.1
