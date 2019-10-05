@@ -37,9 +37,7 @@ def main_topics_small_corpus(corpus, num_topics, n_top_words):
     nmf = NMF(n_components=num_topics, random_state=1).fit(tfidf)
     W = nmf.fit_transform(tfidf)
 
-    # print(W)
 
-    n_top_words = 10
     feature_names = vectorizer.get_feature_names()
 
     topics_json = {}
@@ -81,7 +79,6 @@ def main_topics_large_corpus(corpus, num_topics, n_top_words):
     # fit LDA w/ num topics and bag of words
     lda = LatentDirichletAllocation(n_components=num_topics).fit(tf)
 
-    n_top_words = 10
 
     topics_json = {}
 
@@ -95,7 +92,7 @@ def main_topics_large_corpus(corpus, num_topics, n_top_words):
 
 
 
-
+gi
 if __name__ == "__main__":
     # Example corpus
 
