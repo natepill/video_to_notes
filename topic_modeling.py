@@ -75,6 +75,8 @@ def main_topics_large_corpus(corpus, num_topics, n_top_words):
 
     # fit LDA w/ num topics and bag of words
     lda = LatentDirichletAllocation(n_components=num_topics).fit(tf)
+
+
     topics_json = {}
 
     # Create dictionary of topic number to topic words
@@ -84,9 +86,6 @@ def main_topics_large_corpus(corpus, num_topics, n_top_words):
     # print(topics_json)
 
     return topics_json
-
-
-
 
 if __name__ == "__main__":
     # Example corpus
