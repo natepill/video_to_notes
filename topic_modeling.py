@@ -49,7 +49,7 @@ def main_topics_small_corpus(corpus, num_topics, n_top_words):
     for index, topic in enumerate(nmf.components_):
         topics_json[f"Topic {index+1}"] = [feature_names[i] for i in topic.argsort()[:-n_top_words - 1:-1]]
 
-    print(topics_json)
+    # print(topics_json)
 
     return topics_json
 
@@ -108,4 +108,4 @@ if __name__ == "__main__":
                  "Key promoter extension for Google Chrome."]
 
     print(main_topics_small_corpus(documents, 2, 10))
-    print(main_topics_large_corpus(documents, 2, 10))
+    # print(main_topics_large_corpus(documents, 2, 10))

@@ -4,6 +4,8 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
+from topic_modeling import main_topics_small_corpus
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -27,6 +29,7 @@ def get_data_from_image():
         sentences.append(item.get_text())
 
     print(json.dumps(str(sentences)))
+    print(main_topics_small_corpus(sentences,2,5))
     return str(json.dumps(sentences))
 
 if __name__ == "__main__":
