@@ -10,8 +10,10 @@ from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
 
-
+# NOTE: For local testing
 #df = pd.read_csv("tennis_articles_v4.csv")
+
+# TODO: Cache Glove word embeddings and load them in rather than opening and parsing them each time.
 
 def main_ideas(words):
     sentences = []

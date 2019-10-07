@@ -66,6 +66,50 @@ contraction_mapping = {"ain't": "is not", "aren't": "are not","can't": "cannot",
 
     "you're": "you are", "you've": "you have"}
 
+stop_words = set(stopwords.words('english'))
+def text_cleaner(text):
+    newString = text.lower()
+    newString = BeautifulSoup(newString, "lxml").text
+    newString = re.sub(r'\([^)]*\)', '', newString)
+    newString = re.sub('"','', newString)
+    newString = ' '.join([contraction_mapping[t] if t in contraction_mapping else t for t in newString.split(" ")])
+    newString = re.sub(r"'s\b","",newString)
+    newString = re.sub("[^a-zA-Z]", " ", newString)
+    tokens = [w for w in newString.split() if not w in stop_words]
+    long_words=[]
+    for i in tokens:
+        if len(i)>=3:                  #removing short word
+            long_words.append(i)
+    return (" ".join(long_words)).strip()
+
+cleaned_text = []
+for t in data['Text']:
+    cleaned_text.append(text_cleaner(t))
+
+def summary_cleaner(text):
+    newString = re.sub('"','', text)
+    newString = ' '.join([contraction_mapping[t] if t in contraction_mapping else t for t in newString.split(" ")])
+    newString = re.sub(r"'s\b","",newString)
+    newString = re.sub("[^a-zA-Z]", " ", newString)
+    newString = newString.lower()
+    tokens=newString.split()
+    newString=''
+    for i in tokens:
+        if len(i)>1:
+            newString=newString+i+' '
+    return newString
+
+#Call the above function
+cleaned_summary = []
+for t in data['Summary']:
+    cleaned_summary.append(summary_cleaner(t))
+
+data['cleaned_text']=cleaned_text
+data['cleaned_summary']=cleaned_summary
+data['cleaned_summary'].replace('', np.nan, inplace=True)
+data.dropna(axis=0,inplace=True)
 
 
-print(data['Text'][:10])
+
+# add the START and END special tokens at the beginning and end of the summary:
+data['cleaned_summary'] = data['cleaned_summary'].apply(lambda x : '_START_ '+ x + ' _END_')
