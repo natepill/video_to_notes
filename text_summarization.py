@@ -113,3 +113,33 @@ data.dropna(axis=0,inplace=True)
 
 # add the START and END special tokens at the beginning and end of the summary:
 data['cleaned_summary'] = data['cleaned_summary'].apply(lambda x : '_START_ '+ x + ' _END_')
+
+
+
+for i in range(5):
+    print("Review:",data['cleaned_text'][i])
+    print("Summary:",data['cleaned_summary'][i])
+    print("\n")
+
+
+max_len_text=80
+max_len_summary=10
+
+
+from sklearn.model_selection import train_test_split
+x_tr,x_val,y_tr,y_val=train_test_split(data['cleaned_text'],data['cleaned_summary'],test_size=0.1,random_state=0,shuffle=True)
+
+# BUILD the vocabulary and converts a word sequence to an integer sequence
+#prepare a tokenizer for reviews on training data
+x_tokenizer = Tokenizer()
+x_tokenizer.fit_on_texts(list(x_tr))
+
+#convert text sequences into integer sequences
+x_tr    =   x_tokenizer.texts_to_sequences(x_tr)
+x_val   =   x_tokenizer.texts_to_sequences(x_val)
+
+#padding zero upto maximum length
+x_tr    =   pad_sequences(x_tr,  maxlen=max_len_text, padding='post')
+x_val   =   pad_sequences(x_val, maxlen=max_len_text, padding='post')
+
+x_voc_size   =  len(x_tokenizer.word_index) +1
