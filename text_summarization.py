@@ -259,6 +259,7 @@ decoder_model = Model(
 [decoder_outputs2] + [state_h2, state_c2])
 
 
+# implementation of the inference process
 def decode_sequence(input_seq):
     # Encode the input as state vectors.
     e_out, e_h, e_c = encoder_model.predict(input_seq)
@@ -293,3 +294,27 @@ def decode_sequence(input_seq):
         e_h, e_c = h, c
 
     return decoded_sentence
+
+
+# Convert an integer sequence to a word sequence for summary as well as the reviews:
+
+def seq2summary(input_seq):
+    newString=''
+    for i in input_seq:
+      if((i!=0 and i!=target_word_index['start']) and i!=target_word_index['end']):
+        newString=newString+reverse_target_word_index[i]+' '
+    return newString
+
+def seq2text(input_seq):
+    newString=''
+    for i in input_seq:
+      if(i!=0):
+        newString=newString+reverse_source_word_index[i]+' '
+    return newString
+
+
+for i in range(len(x_val)):
+  print("Review:",seq2text(x_val[i]))
+  print("Original summary:",seq2summary(y_val[i]))
+  print("Predicted summary:",decode_sequence(x_val[i].reshape(1,max_len_text)))
+  print("\n")
