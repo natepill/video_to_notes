@@ -172,8 +172,8 @@ y_voc_size = len(y_tokenizer.word_index) +1
     the multiple layers of the LSTM stacked on top of each other
 """
 
-from keras import backend as K
-K.clear_session()
+# from keras import backend as K
+# K.clear_session()
 latent_dim = 500
 
 # Encoder
@@ -202,7 +202,7 @@ decoder_lstm = LSTM(latent_dim, return_sequences=True, return_state=True)
 decoder_outputs,decoder_fwd_state, decoder_back_state = decoder_lstm(dec_emb,initial_state=[state_h, state_c])
 
 #Attention Layer
-Attention layer attn_layer = AttentionLayer(name='attention_layer')
+attn_layer = AttentionLayer(name='attention_layer')
 attn_out, attn_states = attn_layer([encoder_outputs, decoder_outputs])
 
 # Concat attention output and decoder LSTM output
