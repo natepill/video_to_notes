@@ -3,9 +3,11 @@ from flask import Flask, render_template, request, redirect, jsonify
 import requests
 import json
 from bs4 import BeautifulSoup
+import pprint
 
 from topic_modeling import main_topics_small_corpus, main_topics_large_corpus
 from main_idea_extraction import main_ideas
+from tf_idf import tf_idf
 
 app = Flask(__name__)
 
@@ -29,13 +31,14 @@ def get_data_from_image():
     for item in soup.find_all('text'):
         sentences.append(item.get_text())
 
-    print(json.dumps(str(sentences)))
-    print(main_topics_small_corpus(sentences,2,5))
-    print("TEST*******************")
-    print(main_topics_large_corpus(sentences,2,5))
-    print("TEST2*******************")
-    print(main_ideas(sentences))
-    return str(json.dumps(sentences))
+    to_return = {}
+    to_return["main_topics"] = main_topics_large_corpus(sentences,2,5)
+    to_return["main_ideas"] = sentences[0:5]
+    to_return["key_words"] = ["words"," words2", "words3","word4"]
+    to_return["summary"] = ["Lorem ipsum other random latin words we like to use"]
+    print(to_return)
+    print(json.dumps(to_return))
+    return str(json.dumps(to_return))
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
