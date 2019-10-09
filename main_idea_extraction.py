@@ -5,34 +5,29 @@ import pandas as pd
 import numpy as np
 import networkx as nx
 import nltk
+import pickle
 import re
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
 
 # NOTE: For local testing
-#df = pd.read_csv("tennis_articles_v4.csv")
+# df = pd.read_csv("tennis_articles_v4.csv")
 
-# TODO: Cache Glove word embeddings and load them in rather than opening and parsing them each time.
 
 def main_ideas(words):
     sentences = []
-    #for s in df["article_text"]:
+    # for s in df["article_text"]:
     for s in words:
+        # print("S:", s)
         sentences.append(sent_tokenize(s))
 
     # flatten list
     sentences = [y for x in sentences for y in x]
 
-
-    word_embeddings = {}
-    f = open('glove.6B.100d.txt', encoding='utf-8')
-    for line in f:
-        values = line.split()
-        word = values[0]
-        coefs = np.asarray(values[1:], dtype='float32')
-        word_embeddings[word] = coefs
-    f.close()
+    word_embeddings_file = open('glove_word_embeddings','rb')
+    word_embeddings = pickle.load(word_embeddings_file)
+    word_embeddings_file.close()
 
     # remove punctuations, numbers and special characters
     clean_sentences = pd.Series(sentences).str.replace("[^a-zA-Z]", " ")
@@ -88,5 +83,28 @@ def main_ideas(words):
     # Extract the top sentences for summary extraction
     ranked_sentences = sorted(((scores[i], s) for i,s in enumerate(sentences)), reverse=True)
     return ranked_sentences
+
+    # Print Top 10 sentences
     #for i in range(10):
         #print(ranked_sentences[i][1])
+
+# if __name__ == "__main__":
+#     main_ideas(df)
+    # print(main_ideas(df))
+    # print(len(df["article_text"]))
+
+
+
+if __name__ == "__main__":
+    word_embeddings = {}
+    f = open('glove.6B/glove.6B.100d.txt', encoding='utf-8')
+    for line in f:
+        values = line.split()
+        word = values[0]
+        coefs = np.asarray(values[1:], dtype='float32')
+        word_embeddings[word] = coefs
+    f.close()
+
+    word_embeddings_file = f = open('glove_word_embeddings', 'wb')
+    pickle.dump(word_embeddings, word_embeddings_file)
+    word_embeddings_file.close()

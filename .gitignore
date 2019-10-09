@@ -7,4 +7,10 @@ google-cloud-sdk
 NLP_part1_part2.ipynb
 amazon-fine-food-reviews
 tennis_articles_v4.csv
+glove.6B
+old_cached_models
+decoder_model.hdf5
+encoder_model.hdf5
+model.hdf5
+glove_word_embeddings
 glove.6B.100d.txt

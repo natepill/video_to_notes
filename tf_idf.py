@@ -50,7 +50,7 @@ def tf_idf(corpus, num_return = 5):
 
         for c in range(len(bag_of_words_arr[r])):
             tf = bag_of_words_arr[r][c]
-            idf = math.log((len(corpus)/num_docs_per_word[c])**2)
+            idf = math.log((len(corpus)/num_docs_per_word[c])**20)
             to_append.append(tf * idf)
 
         weights.append(to_append)
