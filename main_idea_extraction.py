@@ -26,7 +26,7 @@ def main_ideas(words):
 
 
     word_embeddings = {}
-    f = open('glove.6B/glove.6B.100d.txt', encoding='utf-8')
+    f = open('glove.6B.100d.txt', encoding='utf-8')
     for line in f:
         values = line.split()
         word = values[0]

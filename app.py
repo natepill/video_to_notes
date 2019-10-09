@@ -32,9 +32,11 @@ def get_data_from_image():
         sentences.append(item.get_text())
 
     to_return = {}
+
     to_return["main_topics"] = main_topics_large_corpus(sentences,2,5)
-    to_return["main_ideas"] = sentences[0:5]
-    to_return["key_words"] = ["words"," words2", "words3","word4"]
+    to_return["main_ideas"] = main_ideas(sentences)
+    print(to_return["main_ideas"])
+    to_return["key_words"] = tf_idf(sentences, 8)
     to_return["summary"] = ["Lorem ipsum other random latin words we like to use"]
     print(to_return)
     print(json.dumps(to_return))
