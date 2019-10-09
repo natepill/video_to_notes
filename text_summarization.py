@@ -1,3 +1,10 @@
+
+"""
+    FILE CANNOT BE UTILIZED IN LOCAL ENVIORMENT, MUST BE RUN IN CLOUD.
+"""
+
+
+
 import numpy as np
 import pandas as pd
 import re
@@ -383,6 +390,16 @@ def decode_sequence(input_seq):
 model.save('/kaggle/working/model.hdf5')
 encoder_model.save('/kaggle/working/encoder_model.hdf5')
 decoder_model.save('/kaggle/working/decoder_model.hdf5')
+
+
+# Write text and summary tokenizers to pickle files
+x_tokenizer_file = open('text_tokenizer','wb')
+pickle.dump(x_tokenizer, word_embeddings_file)
+x_tokenizer_file.close()
+
+y_tokenizer_file = open('text_tokenizer','wb')
+pickle.dump(y_tokenizer, y_tokenizer_file)
+y_tokenizer_file.close()
 
 
 # Convert an integer sequence to a word sequence for summary as well as the reviews:

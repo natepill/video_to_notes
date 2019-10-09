@@ -94,7 +94,7 @@ def main_ideas(words):
     # print(len(df["article_text"]))
 
 
-#
+# NOTE: Just used as script to word embeddings into pickle file. Keeping temporarily for reference
 # if __name__ == "__main__":
 #     word_embeddings = {}
 #     f = open('glove.6B/glove.6B.100d.txt', encoding='utf-8')
@@ -105,6 +105,6 @@ def main_ideas(words):
 #         word_embeddings[word] = coefs
 #     f.close()
 #
-#     word_embeddings_file = f = open('glove_word_embeddings', 'wb')
+#     word_embeddings_file = open('glove_word_embeddings', 'wb')
 #     pickle.dump(word_embeddings, word_embeddings_file)
 #     word_embeddings_file.close()
