@@ -1,12 +1,52 @@
+<head>
+<style>
+.item1 { grid-area: header; }
+#keyWords { grid-area: a;}
+#mainTopics { grid-area: b;}
+#mainIdeas { grid-area: c;}
+#summary { grid-area: d;}
+
+#results {
+  display: grid;
+  grid-template-areas:
+    'a c c'
+    'b c c'
+    'd d d';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+  height: 750px;
+}
+
+#results > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+</style>
+</head>
 <body>
 
   <input type="text" id="videoURL_ID" value="http://video.google.com/timedtext?lang=en&v=gHkELWFqGKQ"></input>
   <button id = "submit">check response</button>
+
+  <div id = "results">
+    <div id = "keyWords">KEY WORDS</div>
+    <div id = "mainTopics">MAIN TOPICS</div>
+    <div id = "mainIdeas">MAIN IDEAS</div>
+    <div id = "summary">SUMMARY</div>
+  </div>
 </body>
 <script>
 
   const button = document.getElementById("submit")
   const videoID = document.getElementById("videoURL_ID")
+
+  const keyWords = document.getElementById("keyWords")
+  const mainTopics = document.getElementById("mainTopics")
+  const mainIdeas = document.getElementById("mainIdeas")
+  const summary = document.getElementById("summary")
 
   button.addEventListener("click", function(){
     const options = {
@@ -25,11 +65,26 @@
     fetch('./get_data', options).then((res) => {
       console.log("RETURNING RESPONSE ******************")
       console.log(res)
+      return res.json()
     }).then((json) => {
       console.log(json)
+      createSection(json.key_words, keyWords)
+      createSection(json.main_topics["Topic 1"], mainTopics)
+      createSection(json.main_topics["Topic 2"], mainTopics)
+      createSection(json.main_ideas, mainIdeas)
+      createSection(json.summary, summary)
     }).catch((err) => {
       console.log('-- Error --')
       console.log(err.message)
     })
   })
+
+  function createSection(words, container){
+
+    for(let i = 0; i < words.length; i++){
+      el = document.createElement("div")
+      el.innerHTML = words[i]
+      container.appendChild(el)
+    }
+  }
 </script>
