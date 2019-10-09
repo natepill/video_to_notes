@@ -31,12 +31,22 @@ def get_data_from_image():
     for item in soup.find_all('text'):
         sentences.append(item.get_text())
 
-    print(sentences)
+    # print(sentences)
+    # print(main_ideas(sentences))
 
-    
+    # One string instead of array of sentences
+    # sentences_to_string = ' '.join(sentences)
+
+    ranked_main_ideas = main_ideas(sentences)
+    extracted_main_ideas = []
+
+    # Print Top 10 extracted_main_ideas
+    for i in range(10):
+        extracted_main_ideas.append(ranked_main_ideas[i][1])
+
     to_return = {}
     to_return["main_topics"] = main_topics_large_corpus(sentences,2,5)
-    to_return["main_ideas"] = sentences[0:5]
+    to_return["main_ideas"] = extracted_main_ideas
     to_return["key_words"] = ["words"," words2", "words3","word4"]
     to_return["summary"] = ["Lorem ipsum other random latin words we like to use"]
     # print(to_return)

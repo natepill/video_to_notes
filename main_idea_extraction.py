@@ -12,14 +12,14 @@ from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
 
 # NOTE: For local testing
-#df = pd.read_csv("tennis_articles_v4.csv")
+# df = pd.read_csv("tennis_articles_v4.csv")
 
-# TODO: Cache Glove word embeddings and load them in rather than opening and parsing them each time.
 
 def main_ideas(words):
     sentences = []
-    #for s in df["article_text"]:
+    # for s in df["article_text"]:
     for s in words:
+        # print("S:", s)
         sentences.append(sent_tokenize(s))
 
     # flatten list
@@ -83,10 +83,17 @@ def main_ideas(words):
     # Extract the top sentences for summary extraction
     ranked_sentences = sorted(((scores[i], s) for i,s in enumerate(sentences)), reverse=True)
     return ranked_sentences
+
+    # Print Top 10 sentences
     #for i in range(10):
         #print(ranked_sentences[i][1])
 
-#
+# if __name__ == "__main__":
+#     main_ideas(df)
+    # print(main_ideas(df))
+    # print(len(df["article_text"]))
+
+
 #
 # if __name__ == "__main__":
 #     word_embeddings = {}
