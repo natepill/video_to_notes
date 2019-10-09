@@ -12,3 +12,4 @@ old_cached_models
 decoder_model.hdf5
 encoder_model.hdf5
 model.hdf5
+glove_word_embeddings

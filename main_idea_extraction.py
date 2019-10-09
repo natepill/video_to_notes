@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import networkx as nx
 import nltk
+import pickle
 import re
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
@@ -24,15 +25,9 @@ def main_ideas(words):
     # flatten list
     sentences = [y for x in sentences for y in x]
 
-
-    word_embeddings = {}
-    f = open('glove.6B/glove.6B.100d.txt', encoding='utf-8')
-    for line in f:
-        values = line.split()
-        word = values[0]
-        coefs = np.asarray(values[1:], dtype='float32')
-        word_embeddings[word] = coefs
-    f.close()
+    word_embeddings_file = open('glove_word_embeddings','rb')
+    word_embeddings = pickle.load(word_embeddings_file)
+    word_embeddings_file.close()
 
     # remove punctuations, numbers and special characters
     clean_sentences = pd.Series(sentences).str.replace("[^a-zA-Z]", " ")
@@ -90,3 +85,19 @@ def main_ideas(words):
     return ranked_sentences
     #for i in range(10):
         #print(ranked_sentences[i][1])
+
+#
+#
+# if __name__ == "__main__":
+#     word_embeddings = {}
+#     f = open('glove.6B/glove.6B.100d.txt', encoding='utf-8')
+#     for line in f:
+#         values = line.split()
+#         word = values[0]
+#         coefs = np.asarray(values[1:], dtype='float32')
+#         word_embeddings[word] = coefs
+#     f.close()
+#
+#     word_embeddings_file = f = open('glove_word_embeddings', 'wb')
+#     pickle.dump(word_embeddings, word_embeddings_file)
+#     word_embeddings_file.close()

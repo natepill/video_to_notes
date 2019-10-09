@@ -198,15 +198,15 @@ y_tokenizer = Tokenizer(num_words=tot_cnt-cnt)
 y_tokenizer.fit_on_texts(list(y_tr))
 
 #convert text sequences into integer sequences
-y_tr_seq    =   y_tokenizer.texts_to_sequences(y_tr)
-y_val_seq   =   y_tokenizer.texts_to_sequences(y_val)
+y_tr_seq = y_tokenizer.texts_to_sequences(y_tr)
+y_val_seq = y_tokenizer.texts_to_sequences(y_val)
 
 #padding zero upto maximum length
-y_tr    =   pad_sequences(y_tr_seq, maxlen=max_summary_len, padding='post')
-y_val   =   pad_sequences(y_val_seq, maxlen=max_summary_len, padding='post')
+y_tr = pad_sequences(y_tr_seq, maxlen=max_summary_len, padding='post')
+y_val = pad_sequences(y_val_seq, maxlen=max_summary_len, padding='post')
 
 #size of vocabulary
-y_voc  =   y_tokenizer.num_words +1
+y_voc = y_tokenizer.num_words +1
 
 
 # deleting the rows that contain only START and END tokens
