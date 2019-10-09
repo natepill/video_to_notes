@@ -7,7 +7,7 @@ import pprint
 
 from topic_modeling import main_topics_small_corpus, main_topics_large_corpus
 from main_idea_extraction import main_ideas
-from tf_idf import tf_idf
+from tf_idf_built_in import tf_idf
 
 app = Flask(__name__)
 
@@ -45,11 +45,12 @@ def get_data_from_image():
         extracted_main_ideas.append(ranked_main_ideas[i][1])
 
     to_return = {}
+
     to_return["main_topics"] = main_topics_large_corpus(sentences,2,5)
     to_return["main_ideas"] = extracted_main_ideas
-    to_return["key_words"] = ["words"," words2", "words3","word4"]
+    to_return["key_words"] = tf_idf(extracted_main_ideas, to_return["main_topics"])
     to_return["summary"] = ["Lorem ipsum other random latin words we like to use"]
-    # print(to_return)
+    print(to_return)
     # print(json.dumps(to_return))
     return str(json.dumps(to_return))
 
