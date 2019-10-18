@@ -1,6 +1,4 @@
 
-
-
 # implementation of the inference process
 def decode_sequence(input_seq):
     # Encode the input as state vectors.
@@ -40,6 +38,7 @@ def decode_sequence(input_seq):
 
 
 
+
 # Convert an integer sequence to a word sequence for summary as well as the reviews:
 def seq2summary(input_seq):
     newString=''
@@ -56,6 +55,8 @@ def seq2text(input_seq):
     return newString
 
 
+
+# Print Predicted reviews
 for i in range(0,100):
     print("Review:",seq2text(x_tr[i]))
     print("Original summary:",seq2summary(y_tr[i]))
