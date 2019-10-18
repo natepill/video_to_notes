@@ -47,9 +47,9 @@ def get_data_from_image():
     to_return = {}
 
     to_return["main_topics"] = main_topics_large_corpus(sentences,2,5)
-    to_return["main_ideas"] = extracted_main_ideas
+    to_return["main_ideas"] = extracted_main_ideas[2:]
     to_return["key_words"] = tf_idf(extracted_main_ideas, to_return["main_topics"])
-    to_return["summary"] = ["Lorem ipsum other random latin words we like to use"]
+    to_return["summary"] = extracted_main_ideas[0:2]
     print(to_return)
     # print(json.dumps(to_return))
     return str(json.dumps(to_return))
