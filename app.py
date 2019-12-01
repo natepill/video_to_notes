@@ -3,8 +3,9 @@ from flask import Flask, render_template, request, redirect, jsonify
 import requests
 import json
 from bs4 import BeautifulSoup
-import pprint
+import re
 
+# internal moduless
 from topic_modeling import main_topics_small_corpus, main_topics_large_corpus
 from main_idea_extraction import main_ideas
 from tf_idf_built_in import tf_idf
@@ -19,14 +20,36 @@ def index():
 def get_data_from_image():
 
     print(request.json)
+    # http://video.google.com/timedtext?lang=en&v=gHkELWFqGKQ
 
-    url = request.json.get("videoID") #"http://video.google.com/timedtext?lang=en&v=gHkELWFqGKQ"
+    youtube_url = request.json.get("videoID")
 
-    page =  requests.get(url)
+    vid_id_pattern = re.compile("v=.*")
+
+    video_id = vid_id_pattern.search(youtube_url).group(0)
+
+    print("youtube_url:", youtube_url)
+    print("video_id:", video_id)
+
+
+    # print()
+    # >>> p = re.compile("name (.*) is valid")
+    # >>> result = p.search(s)
+    # >>> result
+    # <_sre.SRE_Match object at 0x10555e738>
+    # >>> result.group(1)     # group(1) will return the 1st capture.
+    # 'my_user_name'
+
+
+    video_text_url = f'http://video.google.com/timedtext?lang=en&{video_id}'
+
+    print("video_text_url:", video_text_url)
+
+    page = requests.get(video_text_url)
 
     #print(page.text)
     soup = BeautifulSoup(page.text, 'html.parser')
-    print("TEST_____________")
+    # print("TEST_____________")
     sentences = []
     for item in soup.find_all('text'):
         sentences.append(item.get_text())
