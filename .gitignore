@@ -14,3 +14,4 @@ encoder_model.hdf5
 model.hdf5
 glove_word_embeddings
 glove.6B.100d.txt
+glove_word_embeddings
