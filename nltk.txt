@@ -1,0 +1,7 @@
+wordnet
+reuters
+corpora
+porter_test
+stopwords
+punkt
+tokenize
