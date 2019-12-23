@@ -12,3 +12,4 @@ beautifulsoup4==4.8.1
 protobuf==3.11.2
 scikit_learn==0.22
 gunicorn
+flask
