@@ -10,6 +10,10 @@ from topic_modeling import main_topics_small_corpus, main_topics_large_corpus
 from main_idea_extraction import main_ideas
 from tf_idf_built_in import tf_idf
 
+
+# nltk.download('stopwords')
+# nltk.download('punkt') # one time execution
+
 app = Flask(__name__)
 
 @app.route('/')

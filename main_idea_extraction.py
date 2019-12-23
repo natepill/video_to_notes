@@ -8,8 +8,6 @@ from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
 
-nltk.download('stopwords')
-nltk.download('punkt') # one time execution
 
 # NOTE: For local testing
 # df = pd.read_csv("tennis_articles_v4.csv")

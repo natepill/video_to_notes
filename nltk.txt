@@ -4,4 +4,3 @@ corpora
 porter_test
 stopwords
 punkt
-tokenize
