@@ -32,14 +32,6 @@ def get_data_from_image():
     print("video_id:", video_id)
 
 
-    # print()
-    # >>> p = re.compile("name (.*) is valid")
-    # >>> result = p.search(s)
-    # >>> result
-    # <_sre.SRE_Match object at 0x10555e738>
-    # >>> result.group(1)     # group(1) will return the 1st capture.
-    # 'my_user_name'
-
 
     video_text_url = f'http://video.google.com/timedtext?lang=en&{video_id}'
 
