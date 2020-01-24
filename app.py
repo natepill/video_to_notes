@@ -18,11 +18,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    print("INDEX")
     return render_template('index.html')
 
 @app.route('/get_data', methods=['GET','POST'])
 def get_data_from_image():
-
+    print("HERE")
     print(request.json)
     # http://video.google.com/timedtext?lang=en&v=gHkELWFqGKQ
 

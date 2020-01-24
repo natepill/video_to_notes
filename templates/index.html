@@ -18,6 +18,10 @@
   height: 750px;
 }
 
+.hidden {
+    display: none;
+}
+
 #results > div {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
@@ -31,7 +35,7 @@
   <input type="text" id="videoURL_ID" value="https://www.youtube.com/watch?v=dHSQAEam2yc"></input>
   <button id = "submit">check response</button>
 
-  <div id = "results">
+  <div id = "results" class = "hidden">
     <div id = "keyWords">KEY WORDS</div>
     <div id = "mainTopics">MAIN TOPICS</div>
     <div id = "mainIdeas">MAIN IDEAS</div>
@@ -43,12 +47,12 @@
   const button = document.getElementById("submit")
   const videoID = document.getElementById("videoURL_ID")
 
+  const results = document.getElementById("results")
   const keyWords = document.getElementById("keyWords")
   const mainTopics = document.getElementById("mainTopics")
   const mainIdeas = document.getElementById("mainIdeas")
   const summary = document.getElementById("summary")
 
-  train()
 
   button.addEventListener("click", function(){
     const options = {
@@ -70,6 +74,7 @@
       return res.json()
     }).then((json) => {
       console.log(json)
+      results.class = ""
       createSection(json.key_words, keyWords)
       createSection(json.main_topics["Topic 1"], mainTopics)
       createSection(json.main_topics["Topic 2"], mainTopics)
