@@ -11,8 +11,8 @@ from main_idea_extraction import main_ideas
 from tf_idf_built_in import tf_idf
 
 
-# nltk.download('stopwords')
-# nltk.download('punkt') # one time execution
+nltk.download('stopwords')
+nltk.download('punkt') # one time execution
 
 app = Flask(__name__)
 
@@ -43,6 +43,8 @@ def get_data_from_image():
     print("video_text_url:", video_text_url)
 
     page = requests.get(video_text_url)
+
+    print("AFTER REQUEST TO GET YOUTUBE TRANSCRIPT")
 
     #print(page.text)
     soup = BeautifulSoup(page.text, 'html.parser')
