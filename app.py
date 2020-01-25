@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, jsonify
 import requests
 import json
 from bs4 import BeautifulSoup
+import nltk
 import re
 
 # internal moduless
@@ -35,8 +36,6 @@ def get_data_from_image():
 
     print("youtube_url:", youtube_url)
     print("video_id:", video_id)
-
-
 
     video_text_url = f'http://video.google.com/timedtext?lang=en&{video_id}'
 
