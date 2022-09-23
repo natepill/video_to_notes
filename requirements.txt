@@ -9,6 +9,6 @@ SpeechRecognition==3.8.1
 Keras==2.2.4
 networkx==2.3
 beautifulsoup4==4.8.1
-protobuf==3.11.2
+protobuf==3.18.3
 scikit_learn==0.22
 gunicorn
